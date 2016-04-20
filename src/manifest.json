@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Twitch Language Filter",
+  "short_name": "Twitch Language Filter",
+  "description": "Adds language filter on twitch.tv for directory pages.",
+  "version": "1.0.0",
+  "minimum_chrome_version": "18",
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.twitch.tv/*"
+      ],
+      "js": [
+        "vendor/jquery-1.11.2.min.js",
+        "launcher.js"
+      ],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    "app.js",
+    "app.css"
+  ],
+  "permissions": [
+    "*://*.twitch.tv/*"
+  ]
+}
