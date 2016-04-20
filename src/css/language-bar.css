@@ -1,0 +1,50 @@
+﻿.tlf-languageBar {
+    float: left;
+    line-height: 30px;
+    font-size: 14px;
+    padding-top: .70801rem;
+    margin-right: 6px;
+    position: relative;
+}
+
+.tlf-languageBar-current {
+    background: #6441a5;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+    line-height: normal;
+    padding: 4px;
+    min-width: 27px;
+    text-align: center;
+}
+
+    .tlf-languageBar-current:hover {
+        background: #7550ba;
+        color: #fff;
+        text-decoration: none;
+    }
+
+.tfl-languageBar-menu {
+    position: absolute;
+    padding: 10px 0;
+    left: 0;
+    height: 300px;
+    width: 200px;
+    background: #fff;
+    box-shadow: rgba(0,0,0,.2) 0 0 0 1px inset;
+    z-index: 6000000;
+    overflow-y: scroll;
+}
+
+    .tfl-languageBar-menu li {
+        padding: 4px 20px;
+        cursor: pointer;
+        color: #6441a5;
+        line-height: normal;
+    }
+
+        .tfl-languageBar-menu li:hover {
+            color: #fff;
+            text-decoration: none;
+            background-color: #6441a5;
+        }
