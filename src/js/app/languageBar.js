@@ -10,7 +10,7 @@
             return;
 
         stop();
-        $header.before(tlf.layouts.languageBar);
+        $header.before(layouts.languageBar);
         start();
     }
 

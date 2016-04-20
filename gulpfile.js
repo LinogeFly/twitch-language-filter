@@ -1,5 +1,7 @@
 var gulp = require('gulp'),
     concat = require('gulp-concat-util'),
+    header = require('gulp-header'),
+    footer = require('gulp-footer'),
     del = require('del'),
     merge = require('merge-stream'),
     jshint = require('gulp-jshint');
@@ -23,7 +25,9 @@ gulp.task('js', ['clean'], function () {
     var app = gulp.src(['src/js/app/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'))
-        .pipe(concat('app.js'));
+        .pipe(concat('app.js'))
+        .pipe(header('(function(global) {'))
+        .pipe(footer('main();}(window.TwitchLanguageFilter = window.TwitchLanguageFilter || {}));'));
 
     var manifest = gulp.src(['src/manifest.json']);
 
@@ -35,8 +39,8 @@ gulp.task('js', ['clean'], function () {
         .pipe(gulp.dest('build'));
 });
 
-gulp.task('watch', ['dev'], function () {
-    gulp.watch('src/**/*.*', ['dev']);
+gulp.task('watch', ['default'], function () {
+    gulp.watch('src/**/*.*', ['default']);
 });
 
 gulp.task('dev', ['js', 'css', 'vendor'], function () {
