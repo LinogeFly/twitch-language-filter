@@ -85,14 +85,25 @@ LanguageBar.prototype = (function() {
         var self = this;
 
         // Create component
-        $container = $(self.layout);
-        $menu = $container.find('.tfl-languageBar-menu');
-        $button = $container.find('.tlf-languageBar-current');
-        $langItems = $menu.find('li');
+
+        var $container = $(self.layout);
+        var $menu = $container.find('.tfl-languageBar-menu');
+        var $button = $container.find('.tlf-languageBar-current');
+        var $langItems = $menu.find('li');
+
+        // Add event handlers
 
         $button.click(function (e) {
             e.stopPropagation();
-            $menu.toggle();
+
+            // Save menu visibility status before hiding all menus
+            var isVisible = $menu.is(':visible');
+
+            // Hide all menus (there could be multiple language bar components on the page)
+            $('.tfl-languageBar-menu').hide();
+
+            // Toggle menu
+            if (isVisible) $menu.hide(); else $menu.show();
         });
 
         $menu.click(function (e) {
@@ -108,7 +119,7 @@ LanguageBar.prototype = (function() {
             language_changed();
         });
 
-        // Add component
+        // Add component to DOM
         $insertBeforeElem.before($container);
     }
 
