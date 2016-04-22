@@ -1,4 +1,5 @@
 # Twitch Language Filter
+
 Chrome extension that adds language filter on twitch.tv for directory pages.
 
 # TODO
@@ -6,10 +7,11 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
 ## Tasks
 
 - Storage Service for persisting current language.
-- Language Bar Component
-- Language Bar Initializer (using MutationObserver)
+
+## Tests
+
+- Language Bar
+  - Added only for specific URLs
+  - Added only once
 
 ## Bugs
-
-- Language Bar doesn't get added to directory header sometimes when you load a page for the first time.
-
