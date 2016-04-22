@@ -1,3 +1,4 @@
 ﻿var main = function () {
-    console.log('Starting...');
+    var ui = new Ui();
+    ui.initLanguageBar();
 };

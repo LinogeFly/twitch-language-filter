@@ -1,49 +1,4 @@
-﻿(function () {
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-    var observer = new MutationObserver(function (mutations) {
-        addLanguageBar(mutations);
-    });
-
-    function addLanguageBar(mutations) {
-        var $header = getHeader(mutations);
-        if (!$header.length)
-            return;
-
-        stop();
-        (new LanguageBar()).init($header);
-        start();
-    }
-
-    function getHeader(mutations) {
-        var selector = '.section_header.first > .title';
-
-        if (!isNodeAdded(mutations, selector))
-            return $();
-
-        return $(selector);
-    }
-
-    function isNodeAdded(mutations, selector) {
-        return mutations.some(function (item) {
-            return $(item.addedNodes).find(selector).length !== 0;
-        });
-    }
-
-    function start() {
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    }
-
-    function stop() {
-        observer.disconnect();
-    }
-
-    start();
-})();
-
-var LanguageBar = function (storage) {
+﻿var LanguageBar = function (storage) {
     this.storage = storage;
 
     /*jshint multistr: true */
@@ -80,8 +35,8 @@ var LanguageBar = function (storage) {
     ';
 };
 
-LanguageBar.prototype = (function() {
-    function init ($insertBeforeElem) {
+LanguageBar.prototype = (function () {
+    function create() {
         var self = this;
 
         // Create component
@@ -119,8 +74,7 @@ LanguageBar.prototype = (function() {
             language_changed();
         });
 
-        // Add component to DOM
-        $insertBeforeElem.before($container);
+        return $container;
     }
 
     function language_changed() {
@@ -128,6 +82,6 @@ LanguageBar.prototype = (function() {
     }
 
     return {
-        init: init
+        create: create
     };
 })();
