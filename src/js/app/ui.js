@@ -3,8 +3,12 @@
 var Ui = function () { };
 Ui.prototype = {
     initLanguageBar: function (storage) {
-        var directoryHeaderAppender = (function () {
-            var anchorSelector = '#directory-list > div.streams-grid.items-grid > div.directory_header > ul';
+        var allowedUrls = [
+            '^https?://([a-zA-Z]+\.)?twitch.tv/directory/all(/?|/.+)$'
+        ];
+
+        var languageBarAppender = (function () {
+            var anchorSelector = '#directory-list .directory_header > ul.nav';
             var wrapperClass = 'tlf-languageBarContainer-directoryHeader';
 
             function isAdded() {
@@ -12,9 +16,6 @@ Ui.prototype = {
             }
 
             function add() {
-                if (isAdded())
-                    return;
-
                 var $langBar = (new LanguageBar(storage)).create();
                 $(anchorSelector).append($langBar);
 
@@ -24,46 +25,40 @@ Ui.prototype = {
             }
 
             return {
-                add: add
+                add: add,
+                isAdded: isAdded
             };
         })();
 
-        var routes = [
-            { urlPattern: '^https?://([a-zA-Z]+\.)?twitch.tv/directory/?$', domModifySelector: '.section_header.first > .title', appender: directoryHeaderAppender }
-        ];
-
         var observer = new MutationObserver(function (mutations) {
-            var route = routes[0];
-
-            // TODO: Check URL pattern
-
-            if (!isNodeAdded(mutations, route.domModifySelector))
+            if (!isUrlAllowed(document.URL))
                 return;
 
-            // TODO: Check if isAddedTo
+            if (languageBarAppender.isAdded())
+                return;
 
-            stop();
-            route.appender.add();
-            start();
+            stopMutationObserver();
+            languageBarAppender.add();
+            startMutationObserver();
         });
 
-        function isNodeAdded(mutations, selector) {
-            return mutations.some(function (item) {
-                return $(item.addedNodes).find(selector).length !== 0;
+        function isUrlAllowed(url) {
+            return allowedUrls.some(function (x) {
+                return (new RegExp(x)).test(decodeURIComponent(url));
             });
         }
 
-        function start() {
+        function startMutationObserver() {
             observer.observe(document.body, {
                 childList: true,
                 subtree: true
             });
         }
 
-        function stop() {
+        function stopMutationObserver() {
             observer.disconnect();
         }
 
-        start();
+        startMutationObserver();
     }
 };
