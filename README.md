@@ -16,4 +16,4 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
 
 ## Bugs
 
-Ah come on, I write code without bugs right away! Kappa
+Ah come on, I write code without bugs right away! ![Kappa](http://static-cdn.jtvnw.net/emoticons/v1/25/1.0)
