@@ -10,36 +10,37 @@
         };
 
         document = {
-            body: {}
+            body: {},
+            URL: ''
         };
     });
 
     it("adds LanguageBar on supported pages", function () {
         var lbi = new LanguageBarInitializer();
 
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all')).toEqual(true);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all/ps4')).toEqual(true);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all/xb1')).toEqual(true);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/random')).toEqual(true);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft')).toEqual(true);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all')).toBe(true);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all/ps4')).toBe(true);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/all/xb1')).toBe(true);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/random')).toBe(true);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft')).toBe(true);
     });
 
     it("doesn't add LanguageBar on unsupported pages", function () {
         var lbi = new LanguageBarInitializer();
 
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/')).toEqual(false);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory')).toEqual(false);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/videos/week')).toEqual(false);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/videos/month')).toEqual(false);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft/videos/week')).toEqual(false);
-        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft/videos/month')).toEqual(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/')).toBe(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory')).toBe(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/videos/week')).toBe(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/videos/month')).toBe(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft/videos/week')).toBe(false);
+        expect(lbi._isUrlAllowed('https://www.twitch.tv/directory/game/Minecraft/videos/month')).toBe(false);
     });
 
     it("adds LanguageBar only once on a page", function () {
         // Arrange
 
-        document.URL = 'https://www.twitch.tv/directory/all'
         var lbi = new LanguageBarInitializer();
+        spyOn(lbi, '_isUrlAllowed').and.returnValue(true);
 
         // Mock for _appender
         var isAdded = false;
@@ -57,7 +58,7 @@
 
         // Assert
 
-        expect(lbi._appender.add.calls.count()).toEqual(1);
+        expect(lbi._appender.add.calls.count()).toBe(1);
     });
 
     it("removes LanguageBar from a page if it was added but page is not supported anymore", function () {
