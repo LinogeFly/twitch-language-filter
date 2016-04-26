@@ -1,6 +1,7 @@
-﻿var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+﻿var LanguageBar = require('./language-bar.js');
 
 var Ui = function () { };
+
 Ui.prototype = {
     initLanguageBar: function (storage) {
         var allowedUrls = [
@@ -30,6 +31,7 @@ Ui.prototype = {
             };
         })();
 
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
         var observer = new MutationObserver(function (mutations) {
             if (!isUrlAllowed(document.URL))
                 return;
@@ -62,3 +64,5 @@ Ui.prototype = {
         startMutationObserver();
     }
 };
+
+module.exports = Ui;

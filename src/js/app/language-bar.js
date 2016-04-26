@@ -85,3 +85,5 @@ LanguageBar.prototype = (function () {
         create: create
     };
 })();
+
+module.exports = LanguageBar;

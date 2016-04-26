@@ -4,13 +4,17 @@
   "author": "LinogeFly",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^13.0.0",
     "del": "^2.2.0",
+    "gulp-buffer": "0.0.2",
     "gulp-concat-util": "^0.5.5",
     "gulp-footer": "^1.0.5",
     "gulp-header": "^1.7.1",
     "gulp-jasmine": "^2.3.0",
     "gulp-jshint": "^2.0.0",
     "jshint": "^2.9.2",
-    "merge-stream": "^1.0.0"
+    "merge-stream": "^1.0.0",
+    "rewire": "^2.5.1",
+    "vinyl-source-stream": "^1.1.0"
   }
 }
