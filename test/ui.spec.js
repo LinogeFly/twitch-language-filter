@@ -59,4 +59,18 @@
 
         expect(lbi._appender.add.calls.count()).toEqual(1);
     });
+
+    it("removes LanguageBar from a page if it was added but page is not supported anymore", function () {
+        // Arrange
+        var lbi = new LanguageBarInitializer();
+        spyOn(lbi, '_isUrlAllowed').and.returnValue(false);
+        spyOn(lbi._appender, 'isAdded').and.returnValue(true);
+        spyOn(lbi._appender, 'remove');
+
+        // Act
+        lbi._onDomMutation();
+
+        // Assert
+        expect(lbi._appender.remove.calls.any()).toBe(true);
+    });
 });

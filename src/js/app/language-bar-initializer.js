@@ -29,13 +29,23 @@ LanguageBarInitializer.prototype = {
             });
         }
 
+        function remove() {
+            $(anchorSelector).find('.' + wrapperClass).remove();
+        }
+
         return {
             add: add,
+            remove: remove,
             isAdded: isAdded
         };
     })(),
     _onDomMutation: function (mutations) {
-        if (!this._isUrlAllowed(document.URL))
+        var isUrlAllowed = this._isUrlAllowed(document.URL);
+
+        if (!isUrlAllowed && this._appender.isAdded())
+            this._appender.remove();
+
+        if (!isUrlAllowed)
             return;
 
         if (this._appender.isAdded())
