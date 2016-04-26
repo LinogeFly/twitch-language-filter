@@ -5,4 +5,4 @@
             return typeof args[number] != 'undefined' ? args[number] : match;
         });
     };
-};
+}

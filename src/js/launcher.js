@@ -1,5 +1,3 @@
-chrome.runtime.reload();
-
 $(document).ready(function () {
     var script = document.createElement('script');
     script.src = chrome.extension.getURL("app.js");
