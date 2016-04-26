@@ -1,8 +1,7 @@
 ﻿require('./helpers.js');
 
 (function () {
-    var Ui = require('./ui.js');
+    var LanguageBarInitializer = require('./language-bar-initializer.js');
 
-    var ui = new Ui();
-    ui.initLanguageBar();
+    (new LanguageBarInitializer()).start();
 })();
