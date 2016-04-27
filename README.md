@@ -15,6 +15,10 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
 
 ## Tests
 
+- Storage Service
+  - get/set functions should use cookies when localStorage is not supported
+  - get function should return default value when not found
+
 ## Bugs
 
-Ah come on, I write code without bugs straight away! ![Kappa](http://static-cdn.jtvnw.net/emoticons/v1/25/1.0)
+Come on, I write my code without bugs straight away! ![Kappa](http://static-cdn.jtvnw.net/emoticons/v1/25/1.0)
