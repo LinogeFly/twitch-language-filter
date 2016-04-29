@@ -1,8 +1,9 @@
 ﻿describe("Log", function () {
     var rewire = require("rewire");
-    var log = rewire('../src/js/app/log.js');
+    var log;
 
     function setLogLevel(level) {
+        log = rewire('../src/js/app/log.js');
         log.__set__('config', {
             logLevel: level
         });
