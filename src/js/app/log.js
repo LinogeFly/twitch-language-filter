@@ -2,15 +2,18 @@
 
 module.exports = {
     error: function (message) {
-        if (config.logLevel.toLowerCase() != "error")
+        if (config.logLevel.toLowerCase() === "none")
             return;
 
-        console.log('TFL ERROR: ' + message);
+        console.log('TLF ERROR: ' + message);
     },
     debug: function (message) {
         if (config.logLevel.toLowerCase() === "none")
             return;
 
-        console.log('TFL DEBUG: ' + message);
+        if (config.logLevel.toLowerCase() === "error")
+            return;
+
+        console.log('TLF DEBUG: ' + message);
     }
 };

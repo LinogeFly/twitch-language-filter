@@ -9,13 +9,13 @@
     };
 
     describe("error()", function () {
-        it("shouldn't write if level is 'Verbose'", function () {
+        it("should write if level is 'Verbose'", function () {
             setLogLevel('Verbose');
             spyOn(console, 'log');
 
             log.error('Test message');
 
-            expect(console.log.calls.count()).toBe(0);
+            expect(console.log).toHaveBeenCalled();
         });
 
         it("should write if level is 'Error'", function () {
@@ -47,13 +47,13 @@
             expect(console.log).toHaveBeenCalled();
         });
 
-        it("should write if level is 'Error'", function () {
+        it("shouldn't write if level is 'Error'", function () {
             setLogLevel('Error');
             spyOn(console, 'log');
 
             log.debug('Test message');
 
-            expect(console.log).toHaveBeenCalled();
+            expect(console.log.calls.count()).toBe(0);
         });
 
         it("shouldn't write if level is 'None'", function () {
