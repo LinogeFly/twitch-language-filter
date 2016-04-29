@@ -10,7 +10,8 @@ LanguageBarInitializer.prototype = {
     _allowedUrls: [
         '^https?://([a-zA-Z]+\.)?twitch.tv/directory/all(/?|/.+)$',
         '^https?://([a-zA-Z]+\.)?twitch.tv/directory/random/?$',
-        '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/[^/]*/?$'
+        '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/[^/]*/?$',
+        '^https?://([a-zA-Z]+\.)?twitch.tv/directory/game/Counter-Strike: Global Offensive/map/.+$'
     ],
     _appender: (function () {
         var anchorSelector = '#directory-list .directory_header > ul.nav';

@@ -30,6 +30,8 @@
         expectAllowedUrl('https://www.twitch.tv/directory/game/Minecraft', true, lbi);
         expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive', true, lbi);
         expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive/map/de_dust2', true, lbi);
+        expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive/map/de_dust2?sortBy=skill', true, lbi);
+        expectAllowedUrl('https://www.twitch.tv/directory/game/Hearthstone: Heroes of Warcraft', true, lbi);
     });
 
     it("doesn't add LanguageBar on unsupported pages", function () {
