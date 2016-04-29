@@ -17,5 +17,8 @@
     "rewire": "^2.5.1",
     "run-sequence": "^1.1.5",
     "vinyl-source-stream": "^1.1.0"
+  },
+  "dependencies": {
+    "cookies-js": "^1.2.2"
   }
 }
