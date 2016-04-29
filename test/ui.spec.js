@@ -1,5 +1,8 @@
 ﻿describe("LanguageBarInitializer", function () {
-    var LanguageBarInitializer = require('../src/js/app/language-bar-initializer.js');
+    var rewire = require("rewire");
+    var LanguageBarInitializer = rewire('../src/js/app/language-bar-initializer.js');
+
+    require('./helpers/module-setup.js')(LanguageBarInitializer);
 
     beforeEach(function () {
         window = {
@@ -70,7 +73,7 @@
         expect(lbi._appender.add.calls.count()).toBe(1);
     });
 
-    it("removes LanguageBar from a page if it was added but page is not supported anymore", function () {
+    it("removes LanguageBar from a page if it was added first but URL then got changed to not supported one", function () {
         // Arrange
         var lbi = new LanguageBarInitializer();
         spyOn(lbi, '_isUrlAllowed').and.returnValue(false);

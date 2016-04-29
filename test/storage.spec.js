@@ -2,6 +2,8 @@
     var rewire = require("rewire");
     var Storage = rewire('../src/js/app/storage.js');
 
+    require('./helpers/module-setup.js')(Storage);
+
     beforeEach(function () {
         window = {};
     });

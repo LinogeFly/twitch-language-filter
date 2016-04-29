@@ -1,4 +1,4 @@
-﻿describe("Log module", function () {
+﻿describe("Log", function () {
     var rewire = require("rewire");
     var log = rewire('../src/js/app/log.js');
 
