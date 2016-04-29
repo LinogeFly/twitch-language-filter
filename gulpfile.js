@@ -8,17 +8,65 @@ var gulp = require('gulp'),
     jasmine = require('gulp-jasmine'),
     source = require('vinyl-source-stream'),
     buffer = require('gulp-buffer'),
-    browserify = require('browserify');
+    browserify = require('browserify'),
+    runSequence = require('run-sequence'),
+    through = require('through2'),
+    fs = require('fs');
+
+require('./src/js/core/string-helpers.js');
+
+// Build configuration helpers
+
+var build = 'debug';
+
+function isRelease() {
+    return build === 'release';
+}
+
+function isDebug() {
+    return build === 'debug';
+}
+
+function getConfigModuleContent() {
+    var filename = '_debug.config.js';
+    if (isRelease())
+        filename = '_release.config.js';
+
+    return fs.readFileSync('src/js/app/config/' + filename, 'utf8');
+}
+
+var configTransform = function (file) {
+    return through(function (buff, enc, next) {
+        if (file.endsWith('config\\index.js')) {
+            this.push(getConfigModuleContent());
+        } else {
+            this.push(buff);
+        }
+
+        next();
+    });
+};
+
+gulp.task('set-build:release', function () {
+    build = 'release';
+});
+
+gulp.task('set-build:debug', function () {
+    build = 'debug';
+});
+
+// Build tasks
 
 function getAppStream() {
     return browserify('src/js/app/main.js')
+        .transform(configTransform)
         .bundle()
         .pipe(source('app.js'))
         .pipe(buffer());
 }
 
 gulp.task('lint:app', function () {
-    return gulp.src(['src/js/app/**/*.js'])
+    return gulp.src(['src/js/**/*.js'])
         .pipe(jshint())
         .pipe(jshint.reporter('default'));
 });
@@ -58,14 +106,26 @@ gulp.task('test', function () {
         .pipe(jasmine());
 });
 
-gulp.task('dev', ['js', 'css', 'vendor'], function () {
+gulp.task('build', ['js', 'css', 'vendor'], function () {
 
+});
+
+gulp.task('release', ['set-build:release'], function (callback) {
+    runSequence('build', function () {
+        callback();
+    });
+});
+
+gulp.task('debug', ['set-build:debug'], function (callback) {
+    runSequence('build', function () {
+        callback();
+    });
 });
 
 gulp.task('watch', ['default'], function () {
     gulp.watch(['src/**', 'test/**'], ['default']);
 });
 
-gulp.task('default', ['dev', 'test'], function () {
-
+gulp.task('default', ['debug', 'test'], function () {
+    
 });
