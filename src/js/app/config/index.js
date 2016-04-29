@@ -1,1 +1,3 @@
-﻿throw "Environment specific module was not added during browserify process.";
+﻿module.exports = {
+    logLevel: "Verbose"
+};
