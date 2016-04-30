@@ -1,6 +1,7 @@
-﻿var LanguageBar = function (storage) {
-    this.storage = storage;
+﻿var Storage = require('./storage.js');
+var constants = require('./constants.js');
 
+var LanguageBar = function () {
     /*jshint multistr: true */
     this.layout = '\
         <div class="tlf-languageBar">\
@@ -41,10 +42,14 @@ LanguageBar.prototype = (function () {
 
         // Create component
 
-        var $container = $(self.layout);
-        var $menu = $container.find('.tfl-languageBar-menu');
-        var $button = $container.find('.tlf-languageBar-current');
+        var $component = $(self.layout);
+        var $menu = $component.find('.tfl-languageBar-menu');
+        var $button = $component.find('.tlf-languageBar-current');
         var $langItems = $menu.find('li');
+
+        // Binding
+
+        self._bind($component);
 
         // Add event handlers
 
@@ -71,17 +76,33 @@ LanguageBar.prototype = (function () {
 
         $langItems.click(function () {
             $menu.hide();
-            language_changed();
+
+            var langCode = $(this).data('code');
+            self._languageChanged($component, langCode);
         });
 
-        return $container;
+        return $component;
     }
 
-    function language_changed() {
-        console.log('Language changed');
+    function _bind($component) {
+        var langCode = (new Storage()).get(constants.storageKeys.language, 'en');
+        $component.find('.tlf-languageBar-current').text(langCode);
+    }
+
+    function _languageChanged($component, langCode) {
+        // Save new language
+        (new Storage()).set(constants.storageKeys.language, langCode);
+
+        // Re-bind
+        this._bind($component);
+
+        // Reload page
+        location.reload();
     }
 
     return {
+        _languageChanged: _languageChanged,
+        _bind: _bind,
         create: create
     };
 })();

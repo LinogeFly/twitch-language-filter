@@ -12,6 +12,7 @@
     padding: 4px;
     min-width: 27px;
     text-align: center;
+    text-transform: uppercase;
 }
 
     .tlf-languageBar-current:hover {
@@ -38,6 +39,7 @@
         cursor: pointer;
         color: #6441a5;
         line-height: normal;
+        width: 100%;
     }
 
         .tfl-languageBar-menu li:hover {

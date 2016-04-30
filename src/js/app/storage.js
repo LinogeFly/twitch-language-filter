@@ -1,7 +1,7 @@
 ﻿var cookies = require('cookies-js');
 var log = require('./log.js');
 
-var Storage = module.exports = function () {
+var Storage = function () {
     this._localStorageSupport = true;
     this._prefix = 'TwitchLanguageFilter.';
 
@@ -38,3 +38,5 @@ Storage.prototype = {
             cookies.set(fullName, value, { expires: Infinity });
     }
 };
+
+module.exports = Storage;
