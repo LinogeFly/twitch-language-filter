@@ -1,8 +1,6 @@
 ﻿describe("LanguageBarInitializer", function () {
-    var rewire = require("rewire");
-    var LanguageBarInitializer = rewire('../src/js/app/language-bar-initializer.js');
-
-    require('./helpers/module-setup.js')(LanguageBarInitializer);
+    var rewire = require("rewire"),
+        LanguageBarInitializer;
 
     beforeEach(function () {
         window = {
@@ -16,6 +14,9 @@
             body: {},
             URL: ''
         };
+
+        LanguageBarInitializer = rewire('../src/js/app/language-bar-initializer.js');
+        require('./helpers/module-setup.js')(LanguageBarInitializer);
     });
 
     var expectAllowedUrl = function (url, expected, lbi) {
