@@ -1,5 +1,5 @@
-﻿(function () {
-    var LanguageBarInitializer = require('./language-bar-initializer.js');
+﻿var LanguageBarInitializer = require('./language-bar-initializer.js');
+var Interceptor = require('./interceptor.js');
 
-    (new LanguageBarInitializer()).start();
-})();
+(new Interceptor()).applyToGet();
+(new LanguageBarInitializer()).start();
