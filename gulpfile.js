@@ -89,20 +89,21 @@ gulp.task('test', function () {
         .pipe(jasmine());
 });
 
-gulp.task('build', ['js', 'css', 'vendor'], function () {
-
+gulp.task('build', ['js', 'css', 'vendor'], function (next) {
+    next();
 });
 
-gulp.task('debug', ['build'], function (callback) {
+gulp.task('debug', ['build'], function (next) {
+    next();
 });
 
-gulp.task('release', ['set-build:release'], function (callback) {
+gulp.task('release', ['set-build:release'], function (next) {
     runSequence('build', function () {
-        callback();
+        next();
     });
 });
 
-gulp.task('watch', ['default'], function () {
+gulp.task('watch', ['debug'], function () {
     gulp.watch(['src/**', 'test/**'], ['default']);
 });
 
