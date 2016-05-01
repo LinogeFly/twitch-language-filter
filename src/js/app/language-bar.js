@@ -85,8 +85,7 @@ LanguageBar.prototype = (function () {
     }
 
     function _bind($component) {
-        var langCode = (new Storage()).get(constants.storageKeys.language, 'en');
-        $component.find('.tlf-languageBar-current').text(langCode);
+        $component.find('.tlf-languageBar-current').text((new Storage()).getLanguage());
     }
 
     function _languageChanged($component, langCode) {

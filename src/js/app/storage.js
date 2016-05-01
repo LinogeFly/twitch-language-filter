@@ -1,5 +1,6 @@
 ﻿var cookies = require('cookies-js');
 var log = require('./log.js');
+var constants = require('./constants.js');
 
 var Storage = function () {
     this._localStorageSupport = true;
@@ -36,6 +37,9 @@ Storage.prototype = {
             window.localStorage.setItem(fullName, value);
         else
             cookies.set(fullName, value, { expires: Infinity });
+    },
+    getLanguage: function () {
+        return this.get(constants.storageKeys.language, 'en');
     }
 };
 

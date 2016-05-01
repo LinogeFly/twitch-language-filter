@@ -37,9 +37,8 @@ Interceptor.prototype = {
                     throw 'Endpoint not found for "{0}"'.format(document.URL);
 
                 // Overwrite/set language
-                var langCode = (new Storage()).get(constants.storageKeys.language, 'en');
                 if (typeof t !== 'undefined' && e === endpoint) {
-                    t.broadcaster_language = langCode;
+                    t.broadcaster_language = (new Storage()).getLanguage();
                 }
             } catch (err) {
                 log.error(err);

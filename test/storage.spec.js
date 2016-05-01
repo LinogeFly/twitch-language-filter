@@ -61,4 +61,14 @@
             expect((new Storage()).get('Language', 'en')).toBe('en');
         });
     });
+
+    describe("getLanguage()", function () {
+        it("should return 'en' by default", function () {
+            window.localStorage = {
+                getItem: function () { }
+            };
+
+            expect((new Storage()).getLanguage()).toBe('en');
+        });
+    });
 });
