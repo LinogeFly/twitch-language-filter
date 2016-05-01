@@ -19,41 +19,11 @@
         require('./helpers/module-setup.js')(LanguageBarInitializer);
     });
 
-    var expectAllowedUrl = function (url, expected, lbi) {
-        if (lbi._isUrlAllowed(url) !== expected)
-            fail(url);
-    };
-
-    it("adds LanguageBar on supported pages", function () {
-        var lbi = new LanguageBarInitializer();
-
-        expectAllowedUrl('https://www.twitch.tv/directory/all', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/all/ps4', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/all/xb1', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/random', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Minecraft', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive/map/de_dust2', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Counter-Strike:%20Global%20Offensive/map/de_dust2?sortBy=skill', true, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Hearthstone: Heroes of Warcraft', true, lbi);
-    });
-
-    it("doesn't add LanguageBar on unsupported pages", function () {
-        var lbi = new LanguageBarInitializer();
-
-        expectAllowedUrl('https://www.twitch.tv/', false, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory', false, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/videos/week', false, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/videos/month', false, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Minecraft/videos/week', false, lbi);
-        expectAllowedUrl('https://www.twitch.tv/directory/game/Minecraft/videos/month', false, lbi);
-    });
-
     it("adds LanguageBar only once on a page", function () {
         // Arrange
 
         var lbi = new LanguageBarInitializer();
-        spyOn(lbi, '_isUrlAllowed').and.returnValue(true);
+        LanguageBarInitializer.__set__('isAllowedUrl', function () { return true });
 
         // Mock for _appender
         var isAdded = false;
@@ -77,7 +47,7 @@
     it("removes LanguageBar from a page if it was added first but URL then got changed to not supported one", function () {
         // Arrange
         var lbi = new LanguageBarInitializer();
-        spyOn(lbi, '_isUrlAllowed').and.returnValue(false);
+        LanguageBarInitializer.__set__('isAllowedUrl', function () { return false });
         spyOn(lbi._appender, 'isAdded').and.returnValue(true);
         spyOn(lbi._appender, 'remove');
 
