@@ -38,7 +38,9 @@ Interceptor.prototype = {
 
                 // Overwrite/set language
                 if (typeof t !== 'undefined' && e === endpoint) {
-                    t.broadcaster_language = (new Storage()).getLanguage();
+                    var lang =  (new Storage()).getLanguage();
+                    t.broadcaster_language = lang;
+                    log.debug('broadcaster_language was intercepted and set to "{0}"'.format(lang));
                 }
             } catch (err) {
                 log.error(err);
@@ -47,6 +49,29 @@ Interceptor.prototype = {
             // Call original
             return ori.apply(this, arguments);
         };
+    },
+    applyToGet2: function () {
+        var self = this,
+            ori = Twitch.api._ajax;
+
+        Twitch.api._ajax = function (s, o, u, a) {
+            try {
+                if (s.toLowerCase() === 'get') {
+                    var router = App.__container__.lookup('router:main');
+                    var currentRouteName = router.currentRouteName;
+
+                    var targetRouteName = '';
+                    if (router.targetState.routerJs.activeTransition !== null)
+                        targetRouteName = router.targetState.routerJs.activeTransition.targetName;
+
+                    log.debug('endpoint "{0}", targetRouteName "{1}", currentRouteName "{2}"'.format(o, targetRouteName, currentRouteName));
+                }
+            } catch (err) {
+                log.error(err);
+            }
+
+            return ori.apply(this, arguments);
+        }
     }
 };
 

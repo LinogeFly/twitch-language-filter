@@ -6,8 +6,11 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
 
 ## Tasks
 
-- Move Language Bar from navigation to header.
+- Move Language Bar from navigation to header
 - Implement Interceptor for Twitch.api.get requests
+- Draw icon and banner for Chrome Store
+- Write description for Chrome Store
+- Write small user guide
 
 ## Tests
 
@@ -15,9 +18,6 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
   - It should refresh page after language is changed
   - It should save language code in storage after language is changed
   - It should load language code from storage when created
-
-- Interceptor
-  - It should overwrite "broadcaster_language" request option for allowed URLs only
 
 ## Bugs
 
