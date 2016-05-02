@@ -71,8 +71,8 @@ gulp.task('css', ['clean'], function () {
 
 gulp.task('js', ['clean', 'lint:app'], function () {
     var app = getAppStream()
-        .pipe(header('(function(global) {'))
-        .pipe(footer('}(window.TwitchLanguageFilter = window.TwitchLanguageFilter || {}));'));
+        .pipe(header('(function() {'))
+        .pipe(footer('}());'));
 
     var manifest = gulp.src(['src/manifest.json']);
 
@@ -107,6 +107,8 @@ gulp.task('watch', ['debug'], function () {
     gulp.watch(['src/**', 'test/**'], ['default']);
 });
 
-gulp.task('default', ['debug', 'test'], function () {
-    
+gulp.task('default', ['test'], function (next) {
+    runSequence('debug', function () {
+        next();
+    });
 });
