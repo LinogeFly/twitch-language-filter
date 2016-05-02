@@ -7,11 +7,8 @@ Router.prototype = {
     _routes: [
         { name: 'game-directory.index', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
         { name: 'channels.all', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'channels.random', url: '^https?://api.twitch.tv/kraken/beta/streams/random/?$' },
         { name: 'channels.psFour', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'channels.xbOne', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'csgo.channels.index', url: '^https?://api.twitch.tv/api/cs/?$' },
-        { name: 'csgo.channels.filtered', url: '^https?://api.twitch.tv/api/cs/?$' }
+        { name: 'channels.xbOne', url: '^https?://streams.twitch.tv/kraken/streams/?$' }
     ],
     _getTwitchRouter: function() {
         return App.__container__.lookup('router:main');
