@@ -1,116 +1,83 @@
-﻿xdescribe("Interceptor", function () {
-    var rewire = require('rewire'),
-        interceptor;
+﻿describe("Interceptor", function () {
+    var rewire = require("rewire"),
+        Interceptor;
 
     beforeEach(function () {
-        Twitch = {
-            api: {
-                get: function () { }
-            }
-        };
-
         window = {
+            MutationObserver: function () {
+                this.observe = function () { };
+                this.disconnect = function () { };
+            },
             localStorage: {
                 getItem: function () { return 'en' }
-            }
+            },
+            App: {},
+            Twitch: {},
+            jQuery: {}
         };
+
+        jQuery = {};
 
         document = {
-            URL: 'https://www.twitch.tv/directory'
+            body: {}
         };
 
-        var Interceptor = rewire('../src/js/app/interceptor.js');
+        Interceptor = rewire('../src/js/app/interceptor.js');
         require('./helpers/module-setup.js')(Interceptor);
-
-        interceptor = new Interceptor();
     });
 
-    it("should call original function", function () {
-        var called = false;
-        Twitch.api.get = function () { called = true; }
-        interceptor.applyToGet();
+    it("should set 'broadcaster_language' if route is supported and call $.ajax", function () {
+        // Arrange
+        var isCalled = false;
+        jQuery.ajax = function () { isCalled = true }
+        var interceptor = new Interceptor();
+        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(true);
+        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
+        interceptor._apply();
 
-        Twitch.api.get();
+        // Act
+        var options = {
+            url: 'https://streams.twitch.tv/kraken/streams',
+            data: {}
+        };
+        jQuery.ajax(options);
 
-        expect(called).toBe(true);
+        // Assert
+        expect(options.data.broadcaster_language).toBe('en');
+        expect(isCalled).toBe(true);
     });
 
-    it("should call original function if exception occurs", function () {
-        var called = false;
-        Twitch.api.get = function () { called = true; }
-        spyOn(interceptor, '_getEndpoint').and.throwError();
-        interceptor.applyToGet();
+    it("shouldn't set 'broadcaster_language' if route isn't supported and call $.ajax", function () {
+        // Arrange
+        var isCalled = false;
+        jQuery.ajax = function () { isCalled = true }
+        var interceptor = new Interceptor();
+        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(false);
+        interceptor._apply();
 
-        Twitch.api.get();
+        // Act
+        var options = {
+            data: {}
+        };
+        jQuery.ajax(options);
 
-        expect(called).toBe(true);
+        // Assert
+        expect(options.data.broadcaster_language).toBe(undefined);
+        expect(isCalled).toBe(true);
     });
 
-    it("shouldn't overwrite \"broadcaster_language\" for unsupported URLs", function () {
-        var options;
-        Twitch.api.get = function (e, t, r) { options = t; }
+    it("should call original $.ajax function if exception occurs", function () {
+        // Arrange
+        var isCalled = false;
+        jQuery.ajax = function () { isCalled = true }
+        var interceptor = new Interceptor();
+        spyOn(interceptor._router, 'isRouteSupported').and.throwError();
+        interceptor._apply();
 
-        var Interceptor = rewire('../src/js/app/interceptor.js');
-        Interceptor.__set__('isAllowedUrl', function () { return false; });
-        interceptor = new Interceptor();
+        // Act
+        jQuery.ajax();
 
-        spyOn(interceptor, '_getEndpoint').and.returnValue('streams');
-        interceptor.applyToGet();
-
-        Twitch.api.get('streams', {});
-
-        expect(options.broadcaster_language).toBe(undefined);
-    });
-
-    it("should overwrite \"broadcaster_language\" when endpoint match is found", function () {
-        var options;
-        Twitch.api.get = function (e, t, r) { options = t; }
-
-        var Interceptor = rewire('../src/js/app/interceptor.js');
-        Interceptor.__set__('isAllowedUrl', function () { return true; });
-        interceptor = new Interceptor();
-
-        spyOn(interceptor, '_getEndpoint').and.returnValue('streams');
-        interceptor.applyToGet();
-
-        Twitch.api.get('streams', {});
-
-        expect(options.broadcaster_language).toBe('en');
-    });
-
-    it("shouldn't overwrite \"broadcaster_language\" when endpoint match is not found", function () {
-        var options;
-        Twitch.api.get = function (e, t, r) { options = t; }
-
-        var Interceptor = rewire('../src/js/app/interceptor.js');
-        Interceptor.__set__('isAllowedUrl', function () { return true; });
-        interceptor = new Interceptor();
-
-        spyOn(interceptor, '_getEndpoint').and.returnValue('streams');
-        interceptor.applyToGet();
-
-        Twitch.api.get('not-streams', {});
-
-        expect(options.broadcaster_language).toBe(undefined);
-    });
-
-    it("should search endpoint match from top to bottom", function () {
-        interceptor._endpoints = [
-            {
-                url: '^https://www.twitch.tv/directory/following/?$',
-                endpoint: 'follows'
-            },
-            {
-                url: '^https://www.twitch.tv/directory/?.*$',
-                endpoint: 'streams'
-            }
-        ];
-
-        expect(interceptor._getEndpoint('https://www.twitch.tv/directory/following')).toBe('follows');
-        expect(interceptor._getEndpoint('https://www.twitch.tv/directory/all')).toBe('streams');
-    });
-
-    it("shouldn't return endpoint if there is no match", function () {
-        expect(interceptor._getEndpoint('http://contoso.com')).toBe(undefined);
+        // Assert
+        expect(isCalled).toBe(true);
     });
 });
