@@ -1,10 +1,11 @@
 ﻿var LanguageBar = require('./language-bar.js');
-var isAllowedUrl = require('./allowed-url.js');
+var Router = require('./router.js');
 
 var LanguageBarInitializer = function () {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
     this._observer = new MutationObserver(this._onDomMutation.bind(this));
+    this._router = new Router();
 };
 
 LanguageBarInitializer.prototype = {
@@ -17,6 +18,10 @@ LanguageBarInitializer.prototype = {
         }
 
         function add() {
+            // There is no anchor in DOM yet
+            if (!$(anchorSelector).length)
+                return;
+
             var $langBar = (new LanguageBar()).create();
             $(anchorSelector).append($langBar);
 
@@ -36,10 +41,13 @@ LanguageBarInitializer.prototype = {
         };
     })(),
     _onDomMutation: function (mutations) {
-        if (!isAllowedUrl() && this._appender.isAdded())
+        if (!window.App || !window.Twitch || !window.jQuery)
+            return;
+
+        if (!this._router.isRouteSupported() && this._appender.isAdded())
             this._appender.remove();
 
-        if (!isAllowedUrl())
+        if (!this._router.isRouteSupported())
             return;
 
         if (this._appender.isAdded())
@@ -53,7 +61,7 @@ LanguageBarInitializer.prototype = {
         this._observer.disconnect();
     },
     start: function () {
-        this._observer.observe(document.body, {
+        this._observer.observe(document, {
             childList: true,
             subtree: true
         });

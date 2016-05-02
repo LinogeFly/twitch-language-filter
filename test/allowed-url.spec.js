@@ -1,4 +1,4 @@
-﻿describe("isAllowedUrl()", function () {
+﻿xdescribe("isAllowedUrl()", function () {
     var rewire = require("rewire"),
         isAllowedUrl;
 
