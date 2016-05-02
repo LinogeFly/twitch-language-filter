@@ -45,7 +45,7 @@ Router.prototype = {
     isRouteSupported: function () {
         return (typeof this._getCurrentRoute() !== 'undefined');
     },
-    getRequestUrlMatch: function () {
+    getRequestUrlRegExp: function () {
         var route = this._getCurrentRoute();
 
         if (typeof route !== 'undefined')

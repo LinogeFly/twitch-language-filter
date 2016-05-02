@@ -33,7 +33,7 @@ Interceptor.prototype = {
                     return ori.apply(this, arguments); // Call original $.ajax
 
                 // Overwrite/set broadcaster_language parameter in the request
-                if (new RegExp(self._router.getRequestUrlMatch()).test(e.url)) {
+                if (new RegExp(self._router.getRequestUrlRegExp()).test(e.url)) {
                     var lang = (new Storage()).getLanguage();
                     e.data.broadcaster_language = lang;
                     log.debug('broadcaster_language was intercepted and set to "{0}"'.format(lang));
