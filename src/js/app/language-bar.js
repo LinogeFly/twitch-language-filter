@@ -5,7 +5,7 @@ var LanguageBar = function () {
     /*jshint multistr: true */
     this.layout = '\
         <div class="tlf-languageBar">\
-            <a href="javascript:void(0);" class="tlf-languageBar-current">EN</a>\
+            <span class="tlf-languageBar-current">EN</span>\
             <ul class="tfl-languageBar-menu" style="display: none;">\
                 <li data-code="en">English</li>\
                 <li data-code="da">Dansk</li>\
@@ -34,9 +34,44 @@ var LanguageBar = function () {
             </ul>\
         </div>\
     ';
+
+    this._layouts = {
+        button: '<div class="tlf-languageBar"></div>',
+        menu: '\
+            <ul class="tfl-languageBar-menu" style="display: none;">\
+                <li data-code="en">English</li>\
+                <li data-code="da">Dansk</li>\
+                <li data-code="de">Deutsch</li>\
+                <li data-code="es">Español</li>\
+                <li data-code="fr">Français</li>\
+                <li data-code="it">Italiano</li>\
+                <li data-code="hu">Magyar</li>\
+                <li data-code="nl">Nederlands</li>\
+                <li data-code="no">Norsk</li>\
+                <li data-code="pl">Polski</li>\
+                <li data-code="pt">Português</li>\
+                <li data-code="sk">Slovenčina</li>\
+                <li data-code="fi">Suomi</li>\
+                <li data-code="sv">Svenska</li>\
+                <li data-code="vi">Tiếng Việt</li>\
+                <li data-code="tr">Türkçe</li>\
+                <li data-code="cs">Čeština</li>\
+                <li data-code="bg">Български</li>\
+                <li data-code="ru">Русский</li>\
+                <li data-code="ar">العربية</li>\
+                <li data-code="th">ภาษาไทย</li>\
+                <li data-code="zh">中文</li>\
+                <li data-code="ja">日本語</li>\
+                <li data-code="ko">한국어</li>\
+            </ul>'
+    };
 };
 
 LanguageBar.prototype = (function () {
+    /**
+     * Creates jQuery elements 'button' and 'menu'
+     * @returns {Object}
+     */
     function create() {
         var self = this;
 

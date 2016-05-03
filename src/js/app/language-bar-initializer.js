@@ -10,8 +10,8 @@ var LanguageBarInitializer = function () {
 
 LanguageBarInitializer.prototype = {
     _appender: (function () {
-        var anchorSelector = '#directory-list .directory_header > ul.nav';
-        var wrapperClass = 'tlf-languageBarContainer-directoryHeader';
+        var anchorSelector = '#directory-list .directory_header .title';
+        var wrapperClass = 'tlf-languageBar-container';
 
         function isAdded() {
             return $(anchorSelector).find('.' + wrapperClass).length !== 0;
@@ -26,7 +26,7 @@ LanguageBarInitializer.prototype = {
             $(anchorSelector).append($langBar);
 
             $($langBar).wrap(function () {
-                return '<li class="' + wrapperClass + '"></li>';
+                return '<div class="' + wrapperClass + ' follow-button"><div class="follow"></div></div>';
             });
         }
 

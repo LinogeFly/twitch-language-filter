@@ -1,5 +1,8 @@
-﻿.tlf-languageBar {
+﻿/* General styles */
+
+.tlf-languageBar {
     font-size: 14px;
+    text-align: center;
     position: relative;
 }
 
@@ -9,9 +12,6 @@
     text-decoration: none;
     display: inline-block;
     line-height: normal;
-    padding: 4px;
-    min-width: 27px;
-    text-align: center;
     text-transform: uppercase;
 }
 
@@ -32,6 +32,7 @@
     box-shadow: rgba(0,0,0,.2) 0 0 0 1px inset;
     z-index: 6000000;
     overflow-y: scroll;
+    text-align: left;
 }
 
     .tfl-languageBar-menu li {
@@ -47,3 +48,15 @@
             text-decoration: none;
             background-color: #6441a5;
         }
+
+/* Styles for cases when on page as Follow button  */
+
+.tlf-languageBar-container .follow {
+    overflow: initial !important;
+    padding: 0 !important;
+    min-width: 30px !important;
+}
+
+.follow .tlf-languageBar-current {
+    background-color: initial;
+}
