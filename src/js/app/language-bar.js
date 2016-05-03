@@ -1,5 +1,5 @@
-﻿var Storage = require('./storage.js');
-var constants = require('./constants.js');
+﻿var Storage = require('./storage.js'),
+    constants = require('./constants.js');
 
 var LanguageBar = function () {
     /*jshint multistr: true */

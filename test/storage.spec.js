@@ -1,6 +1,6 @@
 ﻿describe("Storage", function () {
-    var rewire = require("rewire");
-    var Storage;
+    var rewire = require("rewire"),
+        Storage;
 
     beforeEach(function () {
         window = {};

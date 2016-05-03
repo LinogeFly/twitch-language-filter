@@ -1,6 +1,6 @@
-﻿var cookies = require('cookies-js');
-var log = require('./log.js');
-var constants = require('./constants.js');
+﻿var cookies = require('cookies-js'),
+    log = require('./log.js'),
+    constants = require('./constants.js');
 
 var Storage = function () {
     this._localStorageSupport = true;

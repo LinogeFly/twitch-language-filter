@@ -1,5 +1,5 @@
-﻿var LanguageBar = require('./language-bar.js');
-var Router = require('./router.js');
+﻿var LanguageBar = require('./language-bar.js'),
+    Router = require('./router.js');
 
 var LanguageBarInitializer = function () {
     var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
