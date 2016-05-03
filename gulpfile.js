@@ -104,7 +104,7 @@ gulp.task('release', ['set-build:release'], function (next) {
 });
 
 gulp.task('watch', ['debug'], function () {
-    gulp.watch(['src/**', 'test/**'], ['default']);
+    gulp.watch(['src/**'], ['debug']);
 });
 
 gulp.task('default', ['test'], function (next) {
