@@ -3,67 +3,40 @@
 
 var LanguageBar = function () {
     /*jshint multistr: true */
-    this.layout = '\
-        <div class="tlf-languageBar">\
-            <span class="tlf-languageBar-current">EN</span>\
-            <ul class="tfl-languageBar-menu" style="display: none;">\
-                <li data-code="en">English</li>\
-                <li data-code="da">Dansk</li>\
-                <li data-code="de">Deutsch</li>\
-                <li data-code="es">Español</li>\
-                <li data-code="fr">Français</li>\
-                <li data-code="it">Italiano</li>\
-                <li data-code="hu">Magyar</li>\
-                <li data-code="nl">Nederlands</li>\
-                <li data-code="no">Norsk</li>\
-                <li data-code="pl">Polski</li>\
-                <li data-code="pt">Português</li>\
-                <li data-code="sk">Slovenčina</li>\
-                <li data-code="fi">Suomi</li>\
-                <li data-code="sv">Svenska</li>\
-                <li data-code="vi">Tiếng Việt</li>\
-                <li data-code="tr">Türkçe</li>\
-                <li data-code="cs">Čeština</li>\
-                <li data-code="bg">Български</li>\
-                <li data-code="ru">Русский</li>\
-                <li data-code="ar">العربية</li>\
-                <li data-code="th">ภาษาไทย</li>\
-                <li data-code="zh">中文</li>\
-                <li data-code="ja">日本語</li>\
-                <li data-code="ko">한국어</li>\
-            </ul>\
-        </div>\
-    ';
-
     this._layouts = {
-        button: '<div class="tlf-languageBar"></div>',
+        button: '\
+            <div class="tlf-languageBar">\
+                <span class="tlf-languageBar-current"></span>\
+            </div>',
         menu: '\
-            <ul class="tfl-languageBar-menu" style="display: none;">\
-                <li data-code="en">English</li>\
-                <li data-code="da">Dansk</li>\
-                <li data-code="de">Deutsch</li>\
-                <li data-code="es">Español</li>\
-                <li data-code="fr">Français</li>\
-                <li data-code="it">Italiano</li>\
-                <li data-code="hu">Magyar</li>\
-                <li data-code="nl">Nederlands</li>\
-                <li data-code="no">Norsk</li>\
-                <li data-code="pl">Polski</li>\
-                <li data-code="pt">Português</li>\
-                <li data-code="sk">Slovenčina</li>\
-                <li data-code="fi">Suomi</li>\
-                <li data-code="sv">Svenska</li>\
-                <li data-code="vi">Tiếng Việt</li>\
-                <li data-code="tr">Türkçe</li>\
-                <li data-code="cs">Čeština</li>\
-                <li data-code="bg">Български</li>\
-                <li data-code="ru">Русский</li>\
-                <li data-code="ar">العربية</li>\
-                <li data-code="th">ภาษาไทย</li>\
-                <li data-code="zh">中文</li>\
-                <li data-code="ja">日本語</li>\
-                <li data-code="ko">한국어</li>\
-            </ul>'
+            <div class="tlf-languageMenu" style="display: none;">\
+                <ul class="tlf-languageMenu-select" >\
+                    <li data-code="en">English</li>\
+                    <li data-code="da">Dansk</li>\
+                    <li data-code="de">Deutsch</li>\
+                    <li data-code="es">Español</li>\
+                    <li data-code="fr">Français</li>\
+                    <li data-code="it">Italiano</li>\
+                    <li data-code="hu">Magyar</li>\
+                    <li data-code="nl">Nederlands</li>\
+                    <li data-code="no">Norsk</li>\
+                    <li data-code="pl">Polski</li>\
+                    <li data-code="pt">Português</li>\
+                    <li data-code="sk">Slovenčina</li>\
+                    <li data-code="fi">Suomi</li>\
+                    <li data-code="sv">Svenska</li>\
+                    <li data-code="vi">Tiếng Việt</li>\
+                    <li data-code="tr">Türkçe</li>\
+                    <li data-code="cs">Čeština</li>\
+                    <li data-code="bg">Български</li>\
+                    <li data-code="ru">Русский</li>\
+                    <li data-code="ar">العربية</li>\
+                    <li data-code="th">ภาษาไทย</li>\
+                    <li data-code="zh">中文</li>\
+                    <li data-code="ja">日本語</li>\
+                    <li data-code="ko">한국어</li>\
+                </ul>\
+            </div>'
     };
 };
 
@@ -76,67 +49,73 @@ LanguageBar.prototype = (function () {
         var self = this;
 
         // Create component
-
-        var $component = $(self.layout);
-        var $menu = $component.find('.tfl-languageBar-menu');
-        var $button = $component.find('.tlf-languageBar-current');
-        var $langItems = $menu.find('li');
+        var component = {
+            $menu: $(self._layouts.menu),
+            $button: $(self._layouts.button)
+        };
+        var $langItems = component.$menu.find('li');
 
         // Binding
-
-        self._bind($component);
+        self._bind(component);
 
         // Add event handlers
 
-        $button.click(function (e) {
+        component.$button.click(function (e) {
             e.stopPropagation();
-
-            // Save menu visibility status before hiding all menus
-            var isVisible = $menu.is(':visible');
-
-            // Hide all menus (there could be multiple language bar components on the page)
-            $('.tfl-languageBar-menu').hide();
-
-            // Toggle menu
-            if (isVisible) $menu.hide(); else $menu.show();
+            component.$menu.toggle();
+            self._setMenuPosition(component);
         });
 
-        $menu.click(function (e) {
+        component.$menu.click(function (e) {
             e.stopPropagation();
         });
 
         $(document).click(function () {
-            $menu.hide();
+            component.$menu.hide();
         });
 
         $langItems.click(function () {
-            $menu.hide();
+            component.$menu.hide();
 
             var langCode = $(this).data('code');
-            self._languageChanged($component, langCode);
+            self._languageChanged(component, langCode);
         });
 
-        return $component;
+        return component;
     }
 
-    function _bind($component) {
-        $component.find('.tlf-languageBar-current').text((new Storage()).getLanguage());
+    function _bind(component) {
+        component.$button.find('.tlf-languageBar-current').text((new Storage()).getLanguage());
     }
 
-    function _languageChanged($component, langCode) {
+    function _languageChanged(component, langCode) {
         // Save new language
         (new Storage()).set(constants.storageKeys.language, langCode);
 
         // Re-bind
-        this._bind($component);
+        this._bind(component);
 
         // Reload page
         location.reload();
     }
 
+    function _setMenuPosition(component) {
+        var top = component.$button.offset().top + component.$button.height() + 10;
+
+        // Default left
+        var left = component.$button.offset().left - component.$menu.width() + component.$button.width();
+        // Adjust left if goes of parent
+        var parentLeft = component.$menu.parent().offset().left;
+        if (left < parentLeft)
+            left = parentLeft;
+
+        component.$menu.offset({ 'top': top, 'left': left });
+    }
+
     return {
         _languageChanged: _languageChanged,
         _bind: _bind,
+        _setMenuPosition: _setMenuPosition,
         create: create
     };
 })();

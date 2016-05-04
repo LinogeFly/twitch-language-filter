@@ -21,21 +21,50 @@
         text-decoration: none;
     }
 
-.tfl-languageBar-menu {
+.tlf-languageMenu {
     position: absolute;
-    padding: 10px 0;
-    left: 0;
-    margin-top: 2px;
-    height: 300px;
-    width: 200px;
     background: #fff;
-    box-shadow: rgba(0,0,0,.2) 0 0 0 1px inset;
+    border: 5px solid rgba(0,0,0,.2);
     z-index: 6000000;
-    overflow-y: scroll;
-    text-align: left;
+
 }
 
-    .tfl-languageBar-menu li {
+    .tlf-languageMenu:before {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 4px;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        border-color: transparent transparent rgba(0,0,0,.2) transparent;
+        border-style: solid;
+        border-width: 10px;
+    }
+
+    .tlf-languageMenu:after {
+        right: 5px;
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        border-color: transparent transparent #fff transparent;
+        border-style: solid;
+        border-width: 9px;
+    }
+
+.tlf-languageMenu-select {
+    text-align: left;
+    font-size: 14px;
+    overflow-y: scroll;
+    width: 180px;
+    max-height: 260px;
+    margin: 5px 5px 5px 0;
+}
+
+    .tlf-languageMenu-select li {
         padding: 4px 20px;
         cursor: pointer;
         color: #6441a5;
@@ -43,20 +72,28 @@
         width: 100%;
     }
 
-        .tfl-languageBar-menu li:hover {
+        .tlf-languageMenu-select li:hover {
             color: #fff;
             text-decoration: none;
             background-color: #6441a5;
         }
 
-/* Styles for cases when on page as Follow button  */
+        .tlf-languageMenu-select li:first-child {
+            margin-top: 5px;
+        }
 
-.tlf-languageBar-container .follow {
+        .tlf-languageMenu-select li:last-child {
+            margin-bottom: 5px;
+        }
+
+/* Styles for cases when LanguageBar is on a page as Follow button  */
+
+#tlf-languageBar-follow .follow {
     overflow: initial !important;
     padding: 0 !important;
     min-width: 30px !important;
 }
 
-.follow .tlf-languageBar-current {
+#tlf-languageBar-follow .tlf-languageBar-current {
     background-color: initial;
 }

@@ -10,28 +10,33 @@ var LanguageBarInitializer = function () {
 
 LanguageBarInitializer.prototype = {
     _appender: (function () {
-        var anchorSelector = '#directory-list .directory_header .title';
-        var wrapperClass = 'tlf-languageBar-container';
+        var buttonAnchorSelector = '#directory-list .directory_header .title';
+        var menuAnchorSelector = '#main_col .tse-content';
+        var wrapperId = 'tlf-languageBar-follow';
 
         function isAdded() {
-            return $(anchorSelector).find('.' + wrapperClass).length !== 0;
+            return $(buttonAnchorSelector).find('#' + wrapperId).length !== 0;
         }
 
         function add() {
             // There is no anchor in DOM yet
-            if (!$(anchorSelector).length)
+            if (!$(buttonAnchorSelector).length)
                 return;
 
-            var $langBar = (new LanguageBar()).create();
-            $(anchorSelector).append($langBar);
+            var langBar = (new LanguageBar()).create();
 
-            $($langBar).wrap(function () {
-                return '<div class="' + wrapperClass + ' follow-button"><div class="follow"></div></div>';
+            // Add language button
+            $(buttonAnchorSelector).append(langBar.$button);
+            $(langBar.$button).wrap(function () {
+                return '<div id="' + wrapperId + '" class="follow-button"><div class="follow"></div></div>';
             });
+
+            // Add language selection menu
+            $(menuAnchorSelector).prepend(langBar.$menu);
         }
 
         function remove() {
-            $(anchorSelector).find('.' + wrapperClass).remove();
+            $(buttonAnchorSelector).find('#' + wrapperId).remove();
         }
 
         return {
