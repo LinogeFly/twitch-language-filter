@@ -13,7 +13,3 @@ var router = App.__container__.lookup('router:main');
 router.targetState.routerJs.activeTransition.targetName;
 ```
 Beautiful isn't it? :) Took me quite a bit of time to find that property. Now let's rewrite `allowed-url.js` module compleatelly so LanguageBar and Interceptor will be analyzing Ember routes instead of URLs.
-
-## Twitch.api._ajax instead of Twitch.api.get
-
-It turned you that `Twitch.api.get` is not always get called to load streams. On some pages, for example on [Random](https://www.twitch.tv/directory/random) page, `Twitch.api._ajax` gets called instead. It seems that all requests go through `Twitch.api._ajax` even those that are coming to `Twitch.api.get` first. So `Twitch.api._ajax seems` to be a better place to attach the interceptor and then modify only specific requests.
