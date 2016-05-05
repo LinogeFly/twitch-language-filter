@@ -22,6 +22,17 @@ function isRelease() {
     return build === 'release';
 }
 
+function destPath(subPath) {
+    var subPathNorm = '';
+    if (subPath)
+        subPathNorm = '/' + subPath.replace(/(^,+)/g, "") // trim '/'
+
+    if (isRelease())
+        return 'dist' + subPathNorm;
+
+    return 'build' + subPathNorm;
+}
+
 var configTransform = function (file) {
     return through(function (buff, enc, next) {
         if (file.endsWith('config\\index.js') && isRelease()) {
@@ -55,18 +66,23 @@ gulp.task('lint:app', function () {
 });
 
 gulp.task('clean', function () {
-    return del(['build']);
+    return del(destPath());
 });
 
 gulp.task('vendor', ['clean'], function () {
     return gulp.src(['vendor/**'])
-        .pipe(gulp.dest('build/vendor'));
+        .pipe(gulp.dest(destPath('/vendor')));
 });
 
 gulp.task('css', ['clean'], function () {
     return gulp.src(['src/css/**/*.css'])
         .pipe(concat('app.css'))
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest(destPath()));
+});
+
+gulp.task('img', ['clean'], function () {
+    return gulp.src(['src/img/icon-en-*.png'])
+        .pipe(gulp.dest(destPath('/img')));
 });
 
 gulp.task('js', ['clean', 'lint:app'], function () {
@@ -81,7 +97,7 @@ gulp.task('js', ['clean', 'lint:app'], function () {
         .pipe(jshint.reporter('default'))
 
     return merge(app, launcher, manifest)
-        .pipe(gulp.dest('build'));
+        .pipe(gulp.dest(destPath()));
 });
 
 gulp.task('test', function () {
@@ -89,7 +105,7 @@ gulp.task('test', function () {
         .pipe(jasmine());
 });
 
-gulp.task('build', ['js', 'css', 'vendor'], function (next) {
+gulp.task('build', ['js', 'css', 'img', 'vendor'], function (next) {
     next();
 });
 
