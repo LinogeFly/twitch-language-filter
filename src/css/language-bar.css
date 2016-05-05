@@ -9,7 +9,6 @@
 .tlf-languageBar-current {
     background: #6441a5;
     color: #fff;
-    text-decoration: none;
     display: inline-block;
     line-height: normal;
     text-transform: uppercase;
@@ -24,48 +23,45 @@
 .tlf-languageMenu {
     position: absolute;
     background: #fff;
-    border: 5px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0,0,0,.2);
     z-index: 6000000;
-
 }
 
     .tlf-languageMenu:before {
+        right: 6px;
         content: '';
         display: block;
         position: absolute;
-        right: 4px;
         bottom: 100%;
         width: 0;
         height: 0;
-        border-color: transparent transparent rgba(0,0,0,.2) transparent;
-        border-style: solid;
-        border-width: 10px;
+        border: 8px solid transparent;
+        border-bottom-color: rgba(0,0,0,.2);
     }
 
     .tlf-languageMenu:after {
-        right: 5px;
+        right: 7px;
         content: '';
         display: block;
         position: absolute;
         bottom: 100%;
         width: 0;
         height: 0;
-        border-color: transparent transparent #fff transparent;
-        border-style: solid;
-        border-width: 9px;
+        border: 7px solid transparent;
+        border-bottom-color: #fff;
     }
 
 .tlf-languageMenu-select {
     text-align: left;
     font-size: 14px;
     overflow-y: scroll;
-    width: 180px;
-    max-height: 260px;
+    width: 150px;
+    max-height: 215px;
     margin: 5px 5px 5px 0;
 }
 
     .tlf-languageMenu-select li {
-        padding: 4px 20px;
+        padding: 4px 15px;
         cursor: pointer;
         color: #6441a5;
         line-height: normal;
@@ -78,15 +74,11 @@
             background-color: #6441a5;
         }
 
-        .tlf-languageMenu-select li:first-child {
-            margin-top: 5px;
-        }
-
-        .tlf-languageMenu-select li:last-child {
-            margin-bottom: 5px;
-        }
-
 /* Styles for cases when LanguageBar is on a page as Follow button  */
+
+#tlf-languageBar-follow {
+    margin-left: 5px;
+}
 
 #tlf-languageBar-follow .follow {
     overflow: initial !important;

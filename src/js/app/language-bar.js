@@ -100,12 +100,17 @@ LanguageBar.prototype = (function () {
     }
 
     function _setMenuPosition(component) {
-        var top = component.$button.offset().top + component.$button.height() + 10;
+        var button = component.$button[0],
+            menu = component.$menu[0],
+            menuParent = component.$menu.parent()[0];
 
-        // Default left
-        var left = component.$button.offset().left - component.$menu.width() + component.$button.width();
-        // Adjust left if goes of parent
-        var parentLeft = component.$menu.parent().offset().left;
+        // Top
+        var top = button.getBoundingClientRect().top + button.offsetHeight + 8;
+
+        // Left
+        var left = button.getBoundingClientRect().left - menu.offsetWidth + button.offsetWidth;
+        // Adjust left if goes outside of its parent
+        var parentLeft = menuParent.getBoundingClientRect().left;
         if (left < parentLeft)
             left = parentLeft;
 
