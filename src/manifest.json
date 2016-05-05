@@ -5,6 +5,12 @@
   "description": "Adds language filter on twitch.tv for directory pages.",
   "version": "1.0.0",
   "minimum_chrome_version": "18",
+  "icons": {
+    "16": "img/icon-en-16.png",
+    "19": "img/icon-en-19.png",
+    "48": "img/icon-en-48.png",
+    "128": "img/icon-en-128.png"
+  },
   "content_scripts": [
     {
       "matches": [
