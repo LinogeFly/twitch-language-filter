@@ -9,6 +9,9 @@ Chrome extension that adds language filter on twitch.tv for directory pages.
 - Solve annoying problem when language bar gets hidden BEFORE new non supported page gets loaded
 - Write description for Chrome Store
 - Write small user guide
+- Add option to disable language filtering
+- Add support for building as a userscript
+- Page shouldn't refresh if users selects new langues that's the same as a previous one
 
 ## Bugs
 
