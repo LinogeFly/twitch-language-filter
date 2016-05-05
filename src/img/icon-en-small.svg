@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="128"
+   height="128"
+   viewBox="0 0 128 128"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="icon-en.svg"
+   inkscape:export-filename="D:\Projects\TwitchLanguageFilter\docs\icons\icon-en-128.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
+  <defs
+     id="defs4">
+    <clipPath
+       id="clipPath3361"
+       clipPathUnits="userSpaceOnUse">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3363"
+         d="M 0,300 300,300 300,0 0,0 0,300 Z" />
+    </clipPath>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8"
+     inkscape:cx="29.076969"
+     inkscape:cy="85.755797"
+     inkscape:document-units="px"
+     inkscape:current-layer="svg2"
+     showgrid="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1138"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     units="px"
+     showborder="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid4140" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Border"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-924.36216)">
+    <path
+       sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccc"
+       inkscape:connector-curvature="0"
+       id="path3396"
+       d="m 33.129413,1043.7323 0,-8.6292 -16.564713,0 -16.5647,0 0,-44.22017 0,-44.22011 4.6431375,-11.14534 4.6431375,-11.14532 59.356863,-0.005 59.356862,-0.005 0,38.71417 0,38.71417 -17.44579,16.6566 -17.445787,16.6566 -12.802573,0 -12.802587,0 -9.024825,8.6292 -9.024838,8.6293 -8.162087,0 -8.1621,0 0,-8.6293 z m 47.69605,-27.3259 15.811643,0 9.657924,-9.2329 9.65791,-9.233 0,-31.0367 0,-31.0367 -48.18824,0 -48.188225,0 0,40.26966 0,40.26964 13.552938,0 13.552937,0 0,8.7442 0,8.7442 9.16575,-8.7442 9.165738,-8.7442 z"
+       style="fill:#6441a5;fill-opacity:1" />
+    <path
+       style="opacity:1;fill:#f7f7f7;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linejoin:miter;stroke-miterlimit:6;stroke-dasharray:none;stroke-opacity:1"
+       d="m 46.862683,100.42553 0,-8.609899 -13.571429,0 -13.571428,0 0,-39.999999 0,-40 48.035714,0 48.03571,0 0,30.860893 0,30.860892 -9.55357,9.130257 -9.553569,9.130257 -15.849721,0.0089 -15.849721,0.0088 -6.82885,6.552083 c -3.755868,3.603646 -7.833315,7.478096 -9.060993,8.609896 l -2.232143,2.05782 0,-8.6099 z"
+       id="path4143"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"
+       transform="translate(0,924.36216)" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Text"
+     style="display:inline">
+    <text
+       transform="matrix(0.96647586,0,0,1.034687,0,-924.36216)"
+       sodipodi:linespacing="125%"
+       id="text3406"
+       y="961.66833"
+       x="29.692482"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:58.09378052px;line-height:125%;font-family:Arial;-inkscape-font-specification:'Arial Bold';letter-spacing:0px;word-spacing:0px;fill:#6441a5;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       xml:space="preserve"><tspan
+         y="961.66833"
+         x="29.692482"
+         id="tspan3408"
+         sodipodi:role="line">EN</tspan></text>
+  </g>
+</svg>
