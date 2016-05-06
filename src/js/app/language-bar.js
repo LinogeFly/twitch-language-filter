@@ -76,7 +76,7 @@ LanguageBar.prototype = (function () {
         });
 
         $langItems.click(function () {
-            var $this = $(this)
+            var $this = $(this);
 
             component.$menu.hide();
 

@@ -9,6 +9,7 @@ var Interceptor = function () {
 
     this._observer = new MutationObserver(this._onDomMutation.bind(this));
     this._router = new Router();
+    this._storage = new Storage();
 };
 
 Interceptor.prototype = {
@@ -32,9 +33,13 @@ Interceptor.prototype = {
                 if (!self._router.isRouteSupported())
                     return ori.apply(this, arguments); // Call original $.ajax
 
+                // Proceed next only when filtering is not disabled
+                if (self._storage.isDisabled())
+                    return ori.apply(this, arguments); // Call original $.ajax
+
                 // Overwrite/set broadcaster_language parameter in the request
                 if (new RegExp(self._router.getRequestUrlRegExp()).test(e.url)) {
-                    var lang = (new Storage()).getLanguage();
+                    var lang = self._storage.getLanguage();
                     e.data.broadcaster_language = lang;
                     log.debug('broadcaster_language was intercepted and set to "{0}"'.format(lang));
                 }
