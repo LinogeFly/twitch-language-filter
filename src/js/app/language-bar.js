@@ -11,7 +11,8 @@ var LanguageBar = function () {
         menu: '\
             <div class="tlf-languageMenu" style="display: none;">\
                 <ul class="tlf-languageMenu-select" >\
-                    <li data-action="disable">All (Disable)</li>\
+                    <li data-action="disable">(Pause Filter)</li>\
+                    <li data-action="enable">(Unpause Filter)</li>\
                     <li data-code="en">English</li>\
                     <li data-code="da">Dansk</li>\
                     <li data-code="de">Deutsch</li>\
@@ -82,11 +83,13 @@ LanguageBar.prototype = (function () {
 
             var langCode = $this.data('code');
             if (langCode)
-                self._languageChanged(component, langCode);
+                self._language_click(component, langCode);
 
-            if ($this.data('action') === 'disable') {
-                self._disable(component);
-            }
+            if ($this.data('action') === 'enable')
+                self._enable_click(component);
+
+            if ($this.data('action') === 'disable')
+                self._disable_click(component);
         });
 
         return component;
@@ -97,10 +100,12 @@ LanguageBar.prototype = (function () {
 
         component.$button.find('.tlf-languageBar-current').text(storage.getLanguage());
         component.$button.toggleClass('tlf-disabled', storage.isDisabled());
+        component.$menu.find('[data-action=disable]').toggle(!storage.isDisabled());
+        component.$menu.find('[data-action=enable]').toggle(storage.isDisabled());
     }
 
-    function _disable(component) {
-        // Turn on "isDisabled" status
+    function _disable_click(component) {
+        // Turn off "isDisabled" status
         (new Storage()).set(constants.storageKeys.isDisabled, 'true');
 
         // Re-bind
@@ -110,7 +115,18 @@ LanguageBar.prototype = (function () {
         location.reload();
     }
 
-    function _languageChanged(component, langCode) {
+    function _enable_click(component) {
+        // Turn on "isDisabled" status
+        (new Storage()).set(constants.storageKeys.isDisabled, 'false');
+
+        // Re-bind
+        this._bind(component);
+
+        // Reload page
+        location.reload();
+    }
+
+    function _language_click(component, langCode) {
         var storage = new Storage();
 
         // Save new language
@@ -144,8 +160,9 @@ LanguageBar.prototype = (function () {
     }
 
     return {
-        _disable: _disable,
-        _languageChanged: _languageChanged,
+        _disable_click: _disable_click,
+        _enable_click: _enable_click,
+        _language_click: _language_click,
         _bind: _bind,
         _setMenuPosition: _setMenuPosition,
         create: create
