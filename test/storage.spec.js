@@ -81,5 +81,13 @@
 
             expect((new Storage()).isDisabled()).toBe(false);
         });
+
+        it("should return 'true' when it's 'true'", function () {
+            window.localStorage = {
+                getItem: function () { return 'true' }
+            };
+
+            expect((new Storage()).isDisabled()).toBe(true);
+        });
     });
 });
