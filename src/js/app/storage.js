@@ -40,6 +40,9 @@ Storage.prototype = {
     },
     getLanguage: function () {
         return this.get(constants.storageKeys.language, 'en');
+    },
+    isDisabled: function () {
+        return this.get(constants.storageKeys.isDisabled, 'false') === 'true';
     }
 };
 

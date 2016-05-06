@@ -11,6 +11,7 @@ var LanguageBar = function () {
         menu: '\
             <div class="tlf-languageMenu" style="display: none;">\
                 <ul class="tlf-languageMenu-select" >\
+                    <li data-action="disable">All (Disable)</li>\
                     <li data-code="en">English</li>\
                     <li data-code="da">Dansk</li>\
                     <li data-code="de">Deutsch</li>\
@@ -75,22 +76,47 @@ LanguageBar.prototype = (function () {
         });
 
         $langItems.click(function () {
+            var $this = $(this)
+
             component.$menu.hide();
 
-            var langCode = $(this).data('code');
-            self._languageChanged(component, langCode);
+            var langCode = $this.data('code');
+            if (langCode)
+                self._languageChanged(component, langCode);
+
+            if ($this.data('action') === 'disable') {
+                self._disable(component);
+            }
         });
 
         return component;
     }
 
     function _bind(component) {
-        component.$button.find('.tlf-languageBar-current').text((new Storage()).getLanguage());
+        var storage = new Storage();
+
+        component.$button.find('.tlf-languageBar-current').text(storage.getLanguage());
+        component.$button.toggleClass('tlf-disabled', storage.isDisabled());
+    }
+
+    function _disable(component) {
+        // Turn on "isDisabled" status
+        (new Storage()).set(constants.storageKeys.isDisabled, 'true');
+
+        // Re-bind
+        this._bind(component);
+
+        // Reload page
+        location.reload();
     }
 
     function _languageChanged(component, langCode) {
+        var storage = new Storage();
+
         // Save new language
-        (new Storage()).set(constants.storageKeys.language, langCode);
+        storage.set(constants.storageKeys.language, langCode);
+        // Turn off "isDisabled" status
+        storage.set(constants.storageKeys.isDisabled, 'false');
 
         // Re-bind
         this._bind(component);
@@ -118,6 +144,7 @@ LanguageBar.prototype = (function () {
     }
 
     return {
+        _disable: _disable,
         _languageChanged: _languageChanged,
         _bind: _bind,
         _setMenuPosition: _setMenuPosition,

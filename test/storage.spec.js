@@ -72,4 +72,14 @@
             expect((new Storage()).getLanguage()).toBe('en');
         });
     });
+
+    describe("isDisabled()", function () {
+        it("should return 'false' by default", function () {
+            window.localStorage = {
+                getItem: function () { }
+            };
+
+            expect((new Storage()).isDisabled()).toBe(false);
+        });
+    });
 });

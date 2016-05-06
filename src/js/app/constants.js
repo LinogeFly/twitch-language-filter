@@ -1,5 +1,6 @@
 ﻿module.exports = {
     storageKeys: {
-        language: "Language"
+        language: "Language",
+        isDisabled: "IsDisabled"
     }
 };

@@ -4,10 +4,15 @@
     font-size: 14px;
     text-align: center;
     position: relative;
+    background: #6441a5;
+    cursor: pointer;
+}
+
+.tlf-languageBar.tlf-disabled {
+    background: #8c8c8c;
 }
 
 .tlf-languageBar-current {
-    background: #6441a5;
     color: #fff;
     display: inline-block;
     line-height: normal;
