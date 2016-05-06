@@ -1,0 +1,10 @@
+This extension adds language filter on directory pages at twitch.tv. It filters only live channels (no VODs filtering, for example) based on broadcaster language that streamers select as they go live.
+
+How to use:
+- Find the filter on a page with live channels in the page title area
+- Use the filter to set a language you prefer
+- Enjoy browsing cleaned up list with live channels
+
+Known issues:
+- Doesn't work on CS:GO page
+- Doesn't work on Random Channels page
