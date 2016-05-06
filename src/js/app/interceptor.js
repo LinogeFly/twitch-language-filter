@@ -37,12 +37,19 @@ Interceptor.prototype = {
                 if (self._storage.isDisabled())
                     return ori.apply(this, arguments); // Call original $.ajax
 
-                // Overwrite/set broadcaster_language parameter in the request
-                if (new RegExp(self._router.getRequestUrlRegExp()).test(e.url)) {
-                    var lang = self._storage.getLanguage();
-                    e.data.broadcaster_language = lang;
-                    log.debug('broadcaster_language was intercepted and set to "{0}"'.format(lang));
-                }
+                // Proceed next only if request is supported
+                if (!(new RegExp(self._router.getRequestUrlRegExp()).test(e.url)))
+                    return ori.apply(this, arguments); // Call original $.ajax
+
+                // Proceed next only if 'broadcaster_language' is empty
+                if (e.data.broadcaster_language)
+                    return ori.apply(this, arguments); // Call original $.ajax
+
+                // Finbally we're here!
+                // Set broadcaster_language parameter in the request
+                var lang = self._storage.getLanguage();
+                e.data.broadcaster_language = lang;
+                log.debug('broadcaster_language was intercepted and set to "{0}"'.format(lang));
             } catch (err) {
                 log.error(err);
             }

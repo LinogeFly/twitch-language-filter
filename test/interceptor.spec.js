@@ -26,7 +26,7 @@
         require('./helpers/module-setup.js')(Interceptor);
     });
 
-    it("should set 'broadcaster_language' call $.ajax when supported and enabled", function () {
+    it("should set 'broadcaster_language' and call $.ajax when supported, enabled, empty", function () {
         // Arrange
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
@@ -48,7 +48,7 @@
         expect(isCalled).toBe(true);
     });
 
-    it("shouldn't set 'broadcaster_language' call $.ajax when not supported and enabled", function () {
+    it("shouldn't set 'broadcaster_language' and call $.ajax when not supported, enabled, empty", function () {
         // Arrange
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
@@ -70,7 +70,7 @@
         expect(isCalled).toBe(true);
     });
 
-    it("shouldn't set 'broadcaster_language' call $.ajax when supported and disabled", function () {
+    it("shouldn't set 'broadcaster_language' and call $.ajax when supported, disabled, empty", function () {
         // Arrange
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
@@ -92,7 +92,7 @@
         expect(isCalled).toBe(true);
     });
 
-    it("shouldn't set 'broadcaster_language' call $.ajax when not supported and disabled", function () {
+    it("shouldn't set 'broadcaster_language' and call $.ajax when not supported, disabled, empty", function () {
         // Arrange
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
@@ -111,6 +111,30 @@
 
         // Assert
         expect(options.data.broadcaster_language).toBe(undefined);
+        expect(isCalled).toBe(true);
+    });
+
+    it("shouldn't set 'broadcaster_language' and call $.ajax when supported, enabled, not empty", function () {
+        // Arrange
+        var isCalled = false;
+        jQuery.ajax = function () { isCalled = true }
+        var interceptor = new Interceptor();
+        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(true);
+        spyOn(interceptor._storage, 'isDisabled').and.returnValue(false);
+        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
+        interceptor._apply();
+
+        // Act
+        var options = {
+            url: 'https://streams.twitch.tv/kraken/streams',
+            data: {
+                broadcaster_language: 'ru'
+            }
+        };
+        jQuery.ajax(options);
+
+        // Assert
+        expect(options.data.broadcaster_language).toBe('ru');
         expect(isCalled).toBe(true);
     });
 
