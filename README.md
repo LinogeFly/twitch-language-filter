@@ -42,7 +42,6 @@ gulp test
 
 ## Tasks
 
-- Solve annoying problem when language bar gets hidden BEFORE new non supported page is loaded
 - Write small user guide
 - Add support for building as a userscript
 - Page shouldn't refresh if users selects new langue that's the same as a previous one

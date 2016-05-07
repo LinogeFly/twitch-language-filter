@@ -29,8 +29,11 @@ Interceptor.prototype = {
 
         jQuery.ajax = function (e) {
             try {
-                // Proceed next only for supported pages
-                if (!self._router.isRouteSupported())
+                var route = self._router.getTargetOrCurrentRoute(),
+                    isRouteSupported = typeof route !== 'undefined';
+
+                // Proceed next only for supported routes
+                if (!isRouteSupported)
                     return ori.apply(this, arguments); // Call original $.ajax
 
                 // Proceed next only when filtering is not disabled
@@ -38,7 +41,7 @@ Interceptor.prototype = {
                     return ori.apply(this, arguments); // Call original $.ajax
 
                 // Proceed next only if request is supported
-                if (!(new RegExp(self._router.getRequestUrlRegExp()).test(e.url)))
+                if (!(new RegExp(route.requestUrlRegExp).test(e.url)))
                     return ori.apply(this, arguments); // Call original $.ajax
 
                 // Proceed next only if 'broadcaster_language' is empty

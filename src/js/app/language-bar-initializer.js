@@ -49,10 +49,15 @@ LanguageBarInitializer.prototype = {
         if (!window.App || !window.Twitch || !window.jQuery)
             return;
 
-        if (!this._router.isRouteSupported() && this._appender.isAdded())
-            this._appender.remove();
+        var route = this._router.getCurrentRoute(),
+            isRouteSupported = typeof route !== 'undefined';
 
-        if (!this._router.isRouteSupported())
+        if (!isRouteSupported && this._appender.isAdded()) {
+            this._appender.remove();
+            return;
+        }
+
+        if (!isRouteSupported)
             return;
 
         if (this._appender.isAdded())

@@ -5,15 +5,15 @@ var Router = function () { };
 
 Router.prototype = {
     _routes: [
-        { name: 'game-directory.index', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'channels.all', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'channels.psFour', url: '^https?://streams.twitch.tv/kraken/streams/?$' },
-        { name: 'channels.xbOne', url: '^https?://streams.twitch.tv/kraken/streams/?$' }
+        { name: 'game-directory.index', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
+        { name: 'channels.all', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
+        { name: 'channels.psFour', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
+        { name: 'channels.xbOne', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' }
     ],
     _getTwitchRouter: function() {
         return App.__container__.lookup('router:main');
     },
-    _getCurrentRouteName: function () {
+    _getTargetOrCurrentRouteName: function () {
         var twitchRouter = this._getTwitchRouter();
 
         // Return Target Route if it's found since Current Route might be not up to date.
@@ -26,27 +26,30 @@ Router.prototype = {
         if (targetRouteName !== '')
             return targetRouteName;
 
-        // Otherwise return Current Route
+        // Otherwise return name of the Current Route
+        return this._getCurrentRouteName();
+    },
+    _getCurrentRouteName: function () {
+        var twitchRouter = this._getTwitchRouter();
+
         if (!twitchRouter.currentRouteName)
             throw 'Unable to fetch current route from Twitch Ember Router.';
         else
             return twitchRouter.currentRouteName;
     },
-    _getCurrentRoute: function() {
-        var name = this._getCurrentRouteName();
+    getTargetOrCurrentRoute: function () {
+        var name = this._getTargetOrCurrentRouteName();
 
         return this._routes.find(function (x) {
             return x.name.toLowerCase() === name.toLowerCase();
         });
     },
-    isRouteSupported: function () {
-        return (typeof this._getCurrentRoute() !== 'undefined');
-    },
-    getRequestUrlRegExp: function () {
-        var route = this._getCurrentRoute();
+    getCurrentRoute: function() {
+        var name = this._getCurrentRouteName();
 
-        if (typeof route !== 'undefined')
-            return route.url;
+        return this._routes.find(function (x) {
+            return x.name.toLowerCase() === name.toLowerCase();
+        });
     }
 };
 

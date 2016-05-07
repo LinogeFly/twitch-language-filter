@@ -31,9 +31,11 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(true);
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.returnValue({
+            name: 'channels.all',
+            requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$'
+        });
         spyOn(interceptor._storage, 'isDisabled').and.returnValue(false);
-        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
         interceptor._apply();
 
         // Act
@@ -53,9 +55,8 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(false);
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.returnValue(undefined);
         spyOn(interceptor._storage, 'isDisabled').and.returnValue(false);
-        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
         interceptor._apply();
 
         // Act
@@ -75,9 +76,11 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(true);
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.returnValue({
+            name: 'channels.all',
+            requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$'
+        });
         spyOn(interceptor._storage, 'isDisabled').and.returnValue(true);
-        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
         interceptor._apply();
 
         // Act
@@ -97,9 +100,8 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(false);
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.returnValue(undefined);
         spyOn(interceptor._storage, 'isDisabled').and.returnValue(true);
-        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
         interceptor._apply();
 
         // Act
@@ -119,9 +121,10 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.returnValue(true);
-        spyOn(interceptor._storage, 'isDisabled').and.returnValue(false);
-        spyOn(interceptor._router, 'getRequestUrlRegExp').and.returnValue('^https?://streams.twitch.tv/kraken/streams/?$');
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.returnValue({
+            name: 'channels.all',
+            requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$'
+        }); spyOn(interceptor._storage, 'isDisabled').and.returnValue(false);
         interceptor._apply();
 
         // Act
@@ -143,7 +146,7 @@
         var isCalled = false;
         jQuery.ajax = function () { isCalled = true }
         var interceptor = new Interceptor();
-        spyOn(interceptor._router, 'isRouteSupported').and.throwError();
+        spyOn(interceptor._router, 'getTargetOrCurrentRoute').and.throwError();
         interceptor._apply();
 
         // Act
