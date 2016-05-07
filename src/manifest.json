@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Twitch Language Filter",
   "short_name": "Twitch Language Filter",
-  "description": "Adds language filter on twitch.tv for directory pages.",
+  "description": "Allows to filter live channels on twitch.tv by broadcaster language.",
   "version": "1.0.0",
   "minimum_chrome_version": "18",
   "icons": {
