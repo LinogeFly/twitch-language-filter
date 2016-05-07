@@ -1,0 +1,96 @@
+/* General styles */
+
+.tlf-languageBar {
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    background: #6441a5;
+    cursor: pointer;
+}
+
+.tlf-languageBar.tlf-disabled {
+    background: #8c8c8c;
+}
+
+.tlf-languageBar-current {
+    color: #fff;
+    display: inline-block;
+    line-height: normal;
+    text-transform: uppercase;
+}
+
+    .tlf-languageBar-current:hover {
+        background: #7550ba;
+        color: #fff;
+        text-decoration: none;
+    }
+
+.tlf-languageMenu {
+    position: absolute;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.2);
+    z-index: 6000000;
+}
+
+    .tlf-languageMenu:before {
+        right: 6px;
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        border: 8px solid transparent;
+        border-bottom-color: rgba(0,0,0,.2);
+    }
+
+    .tlf-languageMenu:after {
+        right: 7px;
+        content: '';
+        display: block;
+        position: absolute;
+        bottom: 100%;
+        width: 0;
+        height: 0;
+        border: 7px solid transparent;
+        border-bottom-color: #fff;
+    }
+
+.tlf-languageMenu-select {
+    text-align: left;
+    font-size: 14px;
+    overflow-y: scroll;
+    width: 150px;
+    max-height: 215px;
+    margin: 5px 5px 5px 0;
+}
+
+    .tlf-languageMenu-select li {
+        padding: 4px 15px;
+        cursor: pointer;
+        color: #6441a5;
+        line-height: normal;
+        width: 100%;
+    }
+
+        .tlf-languageMenu-select li:hover {
+            color: #fff;
+            text-decoration: none;
+            background-color: #6441a5;
+        }
+
+/* Styles for cases when LanguageBar is on a page as Follow button  */
+
+#tlf-languageBar-follow:not(:first-child) {
+    margin-left: 5px;
+}
+
+#tlf-languageBar-follow .follow {
+    overflow: initial !important;
+    padding: 0 !important;
+    min-width: 30px !important;
+}
+
+#tlf-languageBar-follow .tlf-languageBar-current {
+    background-color: initial;
+}

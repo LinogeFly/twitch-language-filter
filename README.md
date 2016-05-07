@@ -1,6 +1,8 @@
 # About
 
-This is a browser extension for [twitch.tv](https://www.twitch.tv) that allows to filter live channels by broadcaster language.
+This is a browser extension for [twitch.tv](https://www.twitch.tv) that allows to filter live channels by broadcaster language. Currently, the following platforms are supported:
+
+- Extension for Google Chrome. Available in Chrome Web Store, [here](https://chrome.google.com/webstore/detail/twitch-language-filter/ggddmnfeapafllbpabanhhgmimlngbfe).
 
 # How to use
 
@@ -49,3 +51,7 @@ gulp test
 ## Bugs
 
 Come on, I write my code without any bugs right away! ![Kappa](http://static-cdn.jtvnw.net/emoticons/v1/25/1.0)
+
+# Version history
+
+1.0.0 First release, yay!
