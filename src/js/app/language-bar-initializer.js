@@ -28,7 +28,7 @@ LanguageBarInitializer.prototype = {
             // Add language button
             $(buttonAnchorSelector).append(langBar.$button);
             $(langBar.$button).wrap(function () {
-                return '<div id="' + wrapperId + '" class="follow-button"><div class="follow"></div></div>';
+                return '<span id="' + wrapperId + '" class="follow-button"><div class="follow"></div></span>';
             });
 
             // Add language selection menu

@@ -81,7 +81,7 @@
 
 /* Styles for cases when LanguageBar is on a page as Follow button  */
 
-#tlf-languageBar-follow {
+#tlf-languageBar-follow:not(:first-child) {
     margin-left: 5px;
 }
 
