@@ -547,7 +547,7 @@ var Router = function () { };
 
 Router.prototype = {
     _routes: [
-        { name: 'game-directory.index', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
+        { name: 'directory.game.index', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
         { name: 'channels.all', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
         { name: 'channels.psFour', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' },
         { name: 'channels.xbOne', requestUrlRegExp: '^https?://streams.twitch.tv/kraken/streams/?$' }

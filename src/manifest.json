@@ -3,7 +3,7 @@
   "name": "Twitch Language Filter",
   "short_name": "Twitch Language Filter",
   "description": "Allows to filter live channels on twitch.tv by broadcaster language.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "minimum_chrome_version": "18",
   "icons": {
     "16": "img/icon-en-16.png",
