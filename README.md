@@ -54,5 +54,6 @@ Come on, I write my code without any bugs right away! ![Kappa](http://static-cdn
 
 # Version history
 
+1.0.2 Fixed an issue when the extension stopped working on Channels page because Twitch had renamed the route, again.
 1.0.1 Fixed an issue when the extension stopped working on game specific pages because Twitch had renamed the route.
 1.0.0 First release, yay!
